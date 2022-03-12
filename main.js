@@ -33,6 +33,13 @@ let guessDistribution;
 
 
 function pickWord() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get('word') != "")
+    {
+        return decodeURIComponent(urlParams.get('word').replaceAll("x", "%"));
+    }
+
     //today = new Date();
     var differenceInTime = today.getTime() - startDate.getTime();
 
@@ -81,7 +88,6 @@ function sendWord() {
                 compareWords();//compares words and does the rest fills tiles accordingly
                 rowCount++;
                 answersLetters.push(currentWord);//keeps the word in answers array (not the colors)
-                saveUserData();//saves answers to localStorage
                 currentWord = '';//in order to start new word at next line
             } else {
                 animateWakeUp();
